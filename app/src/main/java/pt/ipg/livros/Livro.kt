@@ -1,6 +1,8 @@
 package pt.ipg.livros
 
 import android.content.ContentValues
+import android.database.Cursor
+import android.provider.BaseColumns
 
 data class Livro(
     var titulo : String,
@@ -16,5 +18,21 @@ data class Livro(
         valores.put(TabelaBDLivros.CAMPO_CATEGORIA_ID, idCategoria)
 
         return valores
+    }
+
+    companion object {
+        fun fromCursor(cursor: Cursor): Livro {
+            val posId = cursor.getColumnIndex(BaseColumns._ID)
+            val posTitulo = cursor.getColumnIndex(TabelaBDLivros.CAMPO_TITULO)
+            val posAutor = cursor.getColumnIndex(TabelaBDLivros.CAMPO_AUTOR)
+            val posIdCateg = cursor.getColumnIndex(TabelaBDLivros.CAMPO_CATEGORIA_ID)
+
+            val id = cursor.getLong(posId)
+            val titulo = cursor.getString(posTitulo)
+            val autor = cursor.getString(posAutor)
+            val idCategoria = cursor.getLong(posIdCateg)
+
+            return Livro(titulo, autor, idCategoria, id)
+        }
     }
 }
