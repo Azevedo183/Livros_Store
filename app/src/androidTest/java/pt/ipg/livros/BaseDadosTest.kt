@@ -152,4 +152,28 @@ class BaseDadosTest {
 
         db.close()
     }
+
+    @Test
+    fun consegueLerCategorias() {
+        val db = getWritableDatabase()
+
+        val categoria = Categoria("Aventura")
+        insereCategoria(db, categoria)
+
+        val cursor = TabelaBDCategorias(db).query(
+            TabelaBDCategorias.TODAS_COLUNAS,
+            "${BaseColumns._ID}=?",
+            arrayOf("${categoria.id}"),
+            null,
+            null,
+            null
+        )
+
+        assertEquals(1, cursor.count)
+        assertTrue(cursor.moveToNext())
+
+        val categBD = Categoria.fromCursor(cursor)
+
+        assertEquals(categoria, categBD)
+    }
 }
