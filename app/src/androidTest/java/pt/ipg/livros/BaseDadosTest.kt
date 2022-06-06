@@ -175,5 +175,36 @@ class BaseDadosTest {
         val categBD = Categoria.fromCursor(cursor)
 
         assertEquals(categoria, categBD)
+
+        db.close()
+    }
+
+    @Test
+    fun consegueLerLivros() {
+        val db = getWritableDatabase()
+
+        val categoria = Categoria("Culinária")
+        insereCategoria(db, categoria)
+
+        val livro = Livro("As Delícias de Ella", "Ella Woodward", categoria.id)
+        insereLivro(db, livro)
+
+        val cursor = TabelaBDLivros(db).query(
+            TabelaBDLivros.TODAS_COLUNAS,
+            "${BaseColumns._ID}=?",
+            arrayOf("${livro.id}"),
+            null,
+            null,
+            null
+        )
+
+        assertEquals(1, cursor.count)
+        assertTrue(cursor.moveToNext())
+
+        val livroBD = Livro.fromCursor(cursor)
+
+        assertEquals(livro, livroBD)
+
+        db.close()
     }
 }

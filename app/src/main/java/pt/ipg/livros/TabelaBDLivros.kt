@@ -13,5 +13,7 @@ class TabelaBDLivros(db: SQLiteDatabase) : TabelaBD(db, NOME) {
         const val CAMPO_TITULO = "titulo"
         const val CAMPO_AUTOR = "autor"
         const val CAMPO_CATEGORIA_ID = "categoriaId"
+
+        val TODAS_COLUNAS = arrayOf(BaseColumns._ID, CAMPO_TITULO, CAMPO_AUTOR, CAMPO_CATEGORIA_ID)
     }
 }
