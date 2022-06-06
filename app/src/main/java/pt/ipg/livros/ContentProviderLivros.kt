@@ -2,6 +2,7 @@ package pt.ipg.livros
 
 import android.content.ContentProvider
 import android.content.ContentValues
+import android.content.UriMatcher
 import android.database.Cursor
 import android.database.sqlite.SQLiteOpenHelper
 import android.net.Uri
@@ -207,5 +208,25 @@ class ContentProviderLivros : ContentProvider() {
         selectionArgs: Array<out String>?
     ): Int {
         TODO("Not yet implemented")
+    }
+
+    companion object {
+        const val AUTHORITY = "pt.ipg.livros"
+
+        const val URI_CATEGORIAS = 100
+        const val URI_CATEGORIA_ESPECIFICA = 101
+        const val URI_LIVROS = 200
+        const val URI_LIVRO_ESPECIFICO = 201
+
+        fun getUriMatcher() : UriMatcher {
+            var uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
+
+            uriMatcher.addURI(AUTHORITY, TabelaBDCategorias.NOME, URI_CATEGORIAS)
+            uriMatcher.addURI(AUTHORITY, "${TabelaBDCategorias.NOME}/#", URI_CATEGORIA_ESPECIFICA)
+            uriMatcher.addURI(AUTHORITY, TabelaBDLivros.NOME, URI_LIVROS)
+            uriMatcher.addURI(AUTHORITY, "${TabelaBDLivros.NOME}/#", URI_LIVRO_ESPECIFICO)
+
+            return uriMatcher
+        }
     }
 }
