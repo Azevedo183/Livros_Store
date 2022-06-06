@@ -91,7 +91,7 @@ class BaseDadosTest {
     }
 
     @Test
-    fun consegueAlterarLivros() {
+    fun consegueAlterarLivro() {
         val db = getWritableDatabase()
 
         val categoriaSuspense = Categoria("Suspense")
@@ -113,6 +113,22 @@ class BaseDadosTest {
             arrayOf("${livro.id}"))
 
         assertEquals(1, registosAlterados)
+
+        db.close()
+    }
+
+    @Test
+    fun consegueEliminarCategoria() {
+        val db = getWritableDatabase()
+
+        val categoria = Categoria("Teste")
+        insereCategoria(db, categoria)
+
+        val registosEliminados = TabelaBDCategorias(db).delete(
+            "${BaseColumns._ID}=?",
+            arrayOf("${categoria.id}"))
+
+        assertEquals(1, registosEliminados)
 
         db.close()
     }
