@@ -32,9 +32,9 @@ class ListaLivrosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonSecond.setOnClickListener {
-            findNavController().navigate(R.id.action_ListaLivros_to_MenuPrincipal)
-        }
+//        binding.buttonSecond.setOnClickListener {
+//            findNavController().navigate(R.id.action_ListaLivros_to_MenuPrincipal)
+//        }
     }
 
     override fun onDestroyView() {
