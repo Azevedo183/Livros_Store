@@ -12,17 +12,17 @@
         tools:layout="@layout/fragment_menu_principal">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_MenuPrincipal_to_ListaLivros"
+            app:destination="@id/ListaLivrosFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
-        android:name="pt.ipg.livros.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:id="@+id/ListaLivrosFragment"
+        android:name="pt.ipg.livros.ListaLivrosFragment"
+        android:label="@string/lista_livros_label"
+        tools:layout="@layout/fragment_lista_livros">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
+            android:id="@+id/action_ListaLivros_to_MenuPrincipal"
             app:destination="@id/MenuPrincipalFragment" />
     </fragment>
 </navigation>

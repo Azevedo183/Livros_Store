@@ -3,11 +3,8 @@
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="menu_principal_label">Menu principal</string>
-    <string name="second_fragment_label">Second Fragment</string>
+    <string name="lista_livros_label">Livros</string>
     <string name="categorias">Categorias</string>
     <string name="livros">Livros</string>
     <string name="previous">Previous</string>
-
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>
