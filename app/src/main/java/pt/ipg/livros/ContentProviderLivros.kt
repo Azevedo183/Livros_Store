@@ -4,11 +4,11 @@ import android.content.ContentProvider
 import android.content.ContentValues
 import android.content.UriMatcher
 import android.database.Cursor
-import android.database.sqlite.SQLiteOpenHelper
 import android.net.Uri
+import android.provider.BaseColumns
 
 class ContentProviderLivros : ContentProvider() {
-    var db : BDLivrosOpenHelper? = null
+    var dbOpenHelper : BDLivrosOpenHelper? = null
 
     /**
      * Implement this to initialize your content provider on startup.
@@ -38,7 +38,7 @@ class ContentProviderLivros : ContentProvider() {
      * @return true if the provider was successfully loaded, false otherwise
      */
     override fun onCreate(): Boolean {
-        db = BDLivrosOpenHelper(context)
+        dbOpenHelper = BDLivrosOpenHelper(context)
 
         return true
     }
@@ -117,7 +117,26 @@ class ContentProviderLivros : ContentProvider() {
         selectionArgs: Array<out String>?,
         sortOrder: String?
     ): Cursor? {
-        TODO("Not yet implemented")
+        val db = dbOpenHelper!!.readableDatabase
+
+        requireNotNull(projection)
+        val colunas = projection as Array<String>
+
+        val argsSeleccao = selectionArgs as Array<String>?
+
+        val id = uri.lastPathSegment
+
+        val cursor = when (getUriMatcher().match(uri)) {
+            URI_LIVROS -> TabelaBDLivros(db).query(colunas, selection, argsSeleccao, null, null, sortOrder)
+            URI_CATEGORIAS -> TabelaBDCategorias(db).query(colunas, selection, argsSeleccao, null, null, sortOrder)
+            URI_LIVRO_ESPECIFICO -> TabelaBDLivros(db).query(colunas, "${BaseColumns._ID}=?", arrayOf("${id}"), null, null, null)
+            URI_CATEGORIA_ESPECIFICA -> TabelaBDCategorias(db).query(colunas, "${BaseColumns._ID}=?", arrayOf("${id}"), null, null, null)
+            else -> null
+        }
+
+        db.close()
+
+        return cursor
     }
 
     /**
