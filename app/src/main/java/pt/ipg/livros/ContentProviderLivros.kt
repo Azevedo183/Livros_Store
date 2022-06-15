@@ -139,9 +139,14 @@ class ContentProviderLivros : ContentProvider() {
      * @param uri the URI to query.
      * @return a MIME type string, or `null` if there is no type.
      */
-    override fun getType(uri: Uri): String? {
-        TODO("Not yet implemented")
-    }
+    override fun getType(uri: Uri): String? =
+        when (getUriMatcher().match(uri)) {
+            URI_LIVROS -> "$MULTIPLOS_REGISTOS/${TabelaBDLivros.NOME}"
+            URI_CATEGORIAS -> "$MULTIPLOS_REGISTOS/${TabelaBDCategorias.NOME}"
+            URI_LIVRO_ESPECIFICO -> "$UNICO_REGISTO/${TabelaBDLivros.NOME}"
+            URI_CATEGORIA_ESPECIFICA -> "$UNICO_REGISTO/${TabelaBDCategorias.NOME}"
+            else -> null
+        }
 
     /**
      * Implement this to handle requests to insert a new row. As a courtesy,
@@ -217,6 +222,9 @@ class ContentProviderLivros : ContentProvider() {
         const val URI_CATEGORIA_ESPECIFICA = 101
         const val URI_LIVROS = 200
         const val URI_LIVRO_ESPECIFICO = 201
+
+        const val UNICO_REGISTO = "vnd.android.cursor.item"
+        const val MULTIPLOS_REGISTOS = "vnd.android.cursor.dir"
 
         fun getUriMatcher() : UriMatcher {
             var uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
