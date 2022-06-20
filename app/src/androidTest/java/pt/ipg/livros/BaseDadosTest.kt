@@ -82,7 +82,7 @@ class BaseDadosTest {
 
         val registosAlterados = TabelaBDCategorias(db).update(
             categoria.toContentValues(),
-            "${BaseColumns._ID}=?",
+            "${TabelaBDCategorias.CAMPO_ID}=?",
             arrayOf("${categoria.id}"))
 
         assertEquals(1, registosAlterados)
@@ -109,7 +109,7 @@ class BaseDadosTest {
 
         val registosAlterados = TabelaBDLivros(db).update(
             livro.toContentValues(),
-            "${BaseColumns._ID}=?",
+            "${TabelaBDLivros.CAMPO_ID}=?",
             arrayOf("${livro.id}"))
 
         assertEquals(1, registosAlterados)
@@ -125,7 +125,7 @@ class BaseDadosTest {
         insereCategoria(db, categoria)
 
         val registosEliminados = TabelaBDCategorias(db).delete(
-            "${BaseColumns._ID}=?",
+            "${TabelaBDCategorias.CAMPO_ID}=?",
             arrayOf("${categoria.id}"))
 
         assertEquals(1, registosEliminados)
@@ -145,7 +145,7 @@ class BaseDadosTest {
         insereLivro(db, livro)
 
         val registosEliminados = TabelaBDLivros(db).delete(
-            "${BaseColumns._ID}=?",
+            "${TabelaBDLivros.CAMPO_ID}=?",
             arrayOf("${livro.id}"))
 
         assertEquals(1, registosEliminados)
@@ -162,7 +162,7 @@ class BaseDadosTest {
 
         val cursor = TabelaBDCategorias(db).query(
             TabelaBDCategorias.TODAS_COLUNAS,
-            "${BaseColumns._ID}=?",
+            "${TabelaBDCategorias.CAMPO_ID}=?",
             arrayOf("${categoria.id}"),
             null,
             null,
@@ -191,7 +191,7 @@ class BaseDadosTest {
 
         val cursor = TabelaBDLivros(db).query(
             TabelaBDLivros.TODAS_COLUNAS,
-            "${BaseColumns._ID}=?",
+            "${TabelaBDLivros.CAMPO_ID}=?",
             arrayOf("${livro.id}"),
             null,
             null,
