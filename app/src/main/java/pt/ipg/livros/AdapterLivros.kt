@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-class AdapterLivros : RecyclerView.Adapter<AdapterLivros.ViewHolderLivro>() {
+class AdapterLivros(val fragment: ListaLivrosFragment) : RecyclerView.Adapter<AdapterLivros.ViewHolderLivro>() {
     var cursor: Cursor? = null
         get() = field
         set(value) {
@@ -43,7 +43,8 @@ class AdapterLivros : RecyclerView.Adapter<AdapterLivros.ViewHolderLivro>() {
      * @see .onBindViewHolder
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderLivro {
-        TODO("Not yet implemented")
+        val itemLivro = fragment.layoutInflater.inflate(R.layout.item_livro, parent, false)
+        return ViewHolderLivro(itemLivro)
     }
 
     /**

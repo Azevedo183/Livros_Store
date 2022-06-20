@@ -40,7 +40,7 @@ class ListaLivrosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
         LoaderManager.getInstance(this).initLoader(ID_LOADER_LIVROS, null, this)
 
-        adapterLivros = AdapterLivros()
+        adapterLivros = AdapterLivros(this)
         binding.recyclerViewLivros.adapter = adapterLivros
         binding.recyclerViewLivros.layoutManager = LinearLayoutManager(requireContext())
     }
