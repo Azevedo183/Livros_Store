@@ -3,7 +3,9 @@ package pt.ipg.livros
 import android.database.Cursor
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import org.w3c.dom.Text
 
 class AdapterLivros(val fragment: ListaLivrosFragment) : RecyclerView.Adapter<AdapterLivros.ViewHolderLivro>() {
     var cursor: Cursor? = null
@@ -15,8 +17,20 @@ class AdapterLivros(val fragment: ListaLivrosFragment) : RecyclerView.Adapter<Ad
             }
         }
 
-    class ViewHolderLivro(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolderLivro(itemLivro: View) : RecyclerView.ViewHolder(itemLivro) {
+        val textViewTitulo = itemLivro.findViewById<TextView>(R.id.textViewTitulo)
+        val textViewAutor = itemLivro.findViewById<TextView>(R.id.textViewAutor)
+        val textViewCategoria = itemLivro.findViewById<TextView>(R.id.textViewCategoria)
 
+        var livro : Livro? = null
+            get() = field
+            set(value: Livro?) {
+                field = value
+
+                textViewTitulo.text = livro?.titulo ?: ""
+                textViewAutor.text = livro?.autor ?: ""
+                textViewCategoria.text = "${livro?.idCategoria}"
+            }
     }
 
     /**
@@ -69,7 +83,8 @@ class AdapterLivros(val fragment: ListaLivrosFragment) : RecyclerView.Adapter<Ad
      * @param position The position of the item within the adapter's data set.
      */
     override fun onBindViewHolder(holder: ViewHolderLivro, position: Int) {
-        TODO("Not yet implemented")
+        cursor!!.moveToPosition(position)
+        holder.livro = Livro.fromCursor(cursor!!)
     }
 
     /**
