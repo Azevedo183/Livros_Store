@@ -275,15 +275,19 @@ class ContentProviderLivros : ContentProvider() {
     }
 
     companion object {
-        const val AUTHORITY = "pt.ipg.livros"
+        private const val AUTHORITY = "pt.ipg.livros"
 
-        const val URI_CATEGORIAS = 100
-        const val URI_CATEGORIA_ESPECIFICA = 101
-        const val URI_LIVROS = 200
-        const val URI_LIVRO_ESPECIFICO = 201
+        private const val URI_CATEGORIAS = 100
+        private const val URI_CATEGORIA_ESPECIFICA = 101
+        private const val URI_LIVROS = 200
+        private const val URI_LIVRO_ESPECIFICO = 201
 
-        const val UNICO_REGISTO = "vnd.android.cursor.item"
-        const val MULTIPLOS_REGISTOS = "vnd.android.cursor.dir"
+        private const val UNICO_REGISTO = "vnd.android.cursor.item"
+        private const val MULTIPLOS_REGISTOS = "vnd.android.cursor.dir"
+
+        private val ENDERECO_BASE = Uri.parse("content://$AUTHORITY")
+        val ENDERECO_LIVROS = Uri.withAppendedPath(ENDERECO_BASE, TabelaBDLivros.NOME)
+        val ENDERECO_CATEGORIAS = Uri.withAppendedPath(ENDERECO_BASE, TabelaBDCategorias.NOME)
 
         fun getUriMatcher() : UriMatcher {
             var uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
