@@ -1,10 +1,19 @@
 package pt.ipg.livros
 
+import android.database.Cursor
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 class AdapterLivros : RecyclerView.Adapter<AdapterLivros.ViewHolderLivro>() {
+    var cursor: Cursor? = null
+        get() = field
+        set(value) {
+            if (field != value) {
+                field = value
+                notifyDataSetChanged()
+            }
+        }
 
     class ViewHolderLivro(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
