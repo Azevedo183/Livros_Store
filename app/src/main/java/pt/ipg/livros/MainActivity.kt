@@ -58,6 +58,8 @@ class MainActivity : AppCompatActivity() {
             opcaoProcessada = (fragment as MenuPrincipalFragment).processaOpcaoMenu(item)
         } else if (fragment is ListaLivrosFragment) {
             opcaoProcessada = (fragment as ListaLivrosFragment).processaOpcaoMenu(item)
+        } else if (fragment is InserirLivroFragment) {
+            opcaoProcessada = (fragment as InserirLivroFragment).processaOpcaoMenu(item)
         } else {
             opcaoProcessada = false
         }

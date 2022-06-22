@@ -17,4 +17,7 @@
     <string name="titulo">Título</string>
     <string name="autor">Autor</string>
     <string name="categoria">Categoria</string>
+
+    <string name="guardar">Guardar</string>
+    <string name="cancelar">Cancelar</string>
 </resources>
