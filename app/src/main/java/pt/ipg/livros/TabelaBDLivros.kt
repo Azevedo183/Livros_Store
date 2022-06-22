@@ -32,6 +32,6 @@ class TabelaBDLivros(db: SQLiteDatabase) : TabelaBD(db, NOME) {
         const val CAMPO_AUTOR = "autor"
         const val CAMPO_CATEGORIA_ID = "categoriaId"
 
-        val TODAS_COLUNAS = arrayOf(CAMPO_ID, CAMPO_TITULO, CAMPO_AUTOR, CAMPO_CATEGORIA_ID)
+        val TODAS_COLUNAS = arrayOf(CAMPO_ID, CAMPO_TITULO, CAMPO_AUTOR, CAMPO_CATEGORIA_ID, TabelaBDCategorias.CAMPO_NOME)
     }
 }

@@ -7,7 +7,7 @@ import android.provider.BaseColumns
 data class Livro(
     var titulo : String,
     var autor: String,
-    var idCategoria: Long,
+    var categoria: Categoria,
     var id: Long = -1
 ) {
     fun toContentValues() : ContentValues {
@@ -15,7 +15,7 @@ data class Livro(
 
         valores.put(TabelaBDLivros.CAMPO_TITULO, titulo)
         valores.put(TabelaBDLivros.CAMPO_AUTOR, autor)
-        valores.put(TabelaBDLivros.CAMPO_CATEGORIA_ID, idCategoria)
+        valores.put(TabelaBDLivros.CAMPO_CATEGORIA_ID, categoria.id)
 
         return valores
     }
@@ -26,13 +26,17 @@ data class Livro(
             val posTitulo = cursor.getColumnIndex(TabelaBDLivros.CAMPO_TITULO)
             val posAutor = cursor.getColumnIndex(TabelaBDLivros.CAMPO_AUTOR)
             val posIdCateg = cursor.getColumnIndex(TabelaBDLivros.CAMPO_CATEGORIA_ID)
+            val posNomeCateg =  cursor.getColumnIndex(TabelaBDCategorias.CAMPO_NOME)
 
             val id = cursor.getLong(posId)
             val titulo = cursor.getString(posTitulo)
             val autor = cursor.getString(posAutor)
-            val idCategoria = cursor.getLong(posIdCateg)
 
-            return Livro(titulo, autor, idCategoria, id)
+            val idCategoria = cursor.getLong(posIdCateg)
+            val nomeCategoria = cursor.getString(posNomeCateg)
+            val categoria = Categoria(nomeCategoria, idCategoria)
+
+            return Livro(titulo, autor, categoria, id)
         }
     }
 }

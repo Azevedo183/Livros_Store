@@ -65,7 +65,7 @@ class BaseDadosTest {
         val categoria = Categoria("Aventura")
         insereCategoria(db, categoria)
 
-        val livro = Livro("O Leão que Temos Cá Dentro", "Rachel Bright", categoria.id)
+        val livro = Livro("O Leão que Temos Cá Dentro", "Rachel Bright", categoria)
         insereLivro(db, livro)
 
         db.close()
@@ -100,12 +100,12 @@ class BaseDadosTest {
         val categoriaMisterio = Categoria("Mistério")
         insereCategoria(db, categoriaMisterio)
 
-        val livro = Livro("Teste", "Teste", categoriaSuspense.id)
+        val livro = Livro("Teste", "Teste", categoriaSuspense)
         insereLivro(db, livro)
 
         livro.titulo = "A rapariga no comboio"
         livro.autor = "Paula Hawkins"
-        livro.idCategoria = categoriaMisterio.id
+        livro.categoria = categoriaMisterio
 
         val registosAlterados = TabelaBDLivros(db).update(
             livro.toContentValues(),
@@ -141,7 +141,7 @@ class BaseDadosTest {
         val categoria = Categoria("Auto ajuda")
         insereCategoria(db, categoria)
 
-        val livro = Livro("Teste", "Teste", categoria.id)
+        val livro = Livro("Teste", "Teste", categoria)
         insereLivro(db, livro)
 
         val registosEliminados = TabelaBDLivros(db).delete(
@@ -186,7 +186,7 @@ class BaseDadosTest {
         val categoria = Categoria("Culinária")
         insereCategoria(db, categoria)
 
-        val livro = Livro("As Delícias de Ella", "Ella Woodward", categoria.id)
+        val livro = Livro("As Delícias de Ella", "Ella Woodward", categoria)
         insereLivro(db, livro)
 
         val cursor = TabelaBDLivros(db).query(
