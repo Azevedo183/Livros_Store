@@ -43,6 +43,9 @@ class ListaLivrosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         adapterLivros = AdapterLivros(this)
         binding.recyclerViewLivros.adapter = adapterLivros
         binding.recyclerViewLivros.layoutManager = LinearLayoutManager(requireContext())
+
+        val activity = activity as MainActivity
+        activity.idMenuAtual = R.menu.menu_lista
     }
 
     override fun onDestroyView() {
