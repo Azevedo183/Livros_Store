@@ -24,5 +24,17 @@
         <action
             android:id="@+id/action_ListaLivros_to_MenuPrincipal"
             app:destination="@id/MenuPrincipalFragment" />
+        <action
+            android:id="@+id/action_ListaLivrosFragment_to_InserirLivroFragment"
+            app:destination="@id/InserirLivroFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/InserirLivroFragment"
+        android:name="pt.ipg.livros.InserirLivroFragment"
+        android:label="inserir_livro_label"
+        tools:layout="@layout/fragment_inserir_livro" >
+        <action
+            android:id="@+id/action_InserirLivroFragment_to_ListaLivrosFragment"
+            app:destination="@id/ListaLivrosFragment" />
     </fragment>
 </navigation>

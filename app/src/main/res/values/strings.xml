@@ -4,6 +4,7 @@
 
     <string name="menu_principal_label">Menu principal</string>
     <string name="lista_livros_label">Livros</string>
+    <string name="inserir_livro_label">Inserir livro</string>
 
     <string name="categorias">Categorias</string>
     <string name="livros">Livros</string>
@@ -12,4 +13,8 @@
     <string name="inserir">Inserir</string>
     <string name="alterar">Alterar</string>
     <string name="eliminar">Eliminar</string>
+
+    <string name="titulo">Título</string>
+    <string name="autor">Autor</string>
+    <string name="categoria">Categoria</string>
 </resources>
