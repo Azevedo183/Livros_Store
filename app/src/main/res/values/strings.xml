@@ -1,10 +1,15 @@
 <resources>
     <string name="app_name">Livros</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
+
     <string name="menu_principal_label">Menu principal</string>
     <string name="lista_livros_label">Livros</string>
+
     <string name="categorias">Categorias</string>
     <string name="livros">Livros</string>
-    <string name="previous">Previous</string>
+    <string name="previous">Voltar</string>
+
+    <string name="inserir">Inserir</string>
+    <string name="alterar">Alterar</string>
+    <string name="eliminar">Eliminar</string>
 </resources>
