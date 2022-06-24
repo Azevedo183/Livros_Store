@@ -27,6 +27,9 @@
         <action
             android:id="@+id/action_ListaLivrosFragment_to_InserirLivroFragment"
             app:destination="@id/InserirLivroFragment" />
+        <action
+            android:id="@+id/action_ListaLivrosFragment_to_EliminarLivroFragment"
+            app:destination="@id/EliminarLivroFragment" />
     </fragment>
     <fragment
         android:id="@+id/InserirLivroFragment"
@@ -36,5 +39,17 @@
         <action
             android:id="@+id/action_InserirLivroFragment_to_ListaLivrosFragment"
             app:destination="@id/ListaLivrosFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/EliminarLivroFragment"
+        android:name="pt.ipg.livros.EliminarLivroFragment"
+        android:label="fragment_eliminar_livro"
+        tools:layout="@layout/fragment_eliminar_livro" >
+        <action
+            android:id="@+id/action_EliminarLivroFragment_to_ListaLivrosFragment"
+            app:destination="@id/ListaLivrosFragment" />
+        <argument
+            android:name="livro"
+            app:argType="pt.ipg.livros.Livro" />
     </fragment>
 </navigation>
