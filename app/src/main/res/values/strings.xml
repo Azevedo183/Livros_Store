@@ -24,4 +24,7 @@
     <string name="titulo_obrigatorio">Preencha o título</string>
     <string name="autor_obrigatorio">Preencha o autor</string>
     <string name="categoria_obrigatoria">Escolha uma categoria</string>
+
+    <string name="livro_guardado_sucesso">Livro guardado com sucesso</string>
+    <string name="erro_guardar_livro">Erro ao guardar livro</string>
 </resources>

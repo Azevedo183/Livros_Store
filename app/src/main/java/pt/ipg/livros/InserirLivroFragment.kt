@@ -9,10 +9,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SimpleCursorAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import pt.ipg.livros.databinding.FragmentInserirLivroBinding
 
 class InserirLivroFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
@@ -183,7 +185,17 @@ class InserirLivroFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     private fun insereLivro(titulo: String, autor: String, idCategoria: Long) {
+        val livro = Livro(titulo, autor, Categoria(id = idCategoria))
 
+        val enderecoLivroInserido = requireActivity().contentResolver.insert(ContentProviderLivros.ENDERECO_LIVROS, livro.toContentValues())
+
+        if (enderecoLivroInserido == null) {
+            Snackbar.make(binding.editTextTitulo, R.string.erro_guardar_livro, Snackbar.LENGTH_INDEFINITE).show()
+            return
+        }
+
+        Toast.makeText(requireContext(), R.string.livro_guardado_sucesso, Toast.LENGTH_LONG).show()
+        voltaListaLivros()
     }
 
     private fun voltaListaLivros() {
