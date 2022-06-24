@@ -17,10 +17,16 @@ class AdapterLivros(val fragment: ListaLivrosFragment) : RecyclerView.Adapter<Ad
             }
         }
 
-    class ViewHolderLivro(itemLivro: View) : RecyclerView.ViewHolder(itemLivro) {
+    var viewHolderSelecionado : ViewHolderLivro? = null
+
+    inner class ViewHolderLivro(itemLivro: View) : RecyclerView.ViewHolder(itemLivro), View.OnClickListener {
         val textViewTitulo = itemLivro.findViewById<TextView>(R.id.textViewTitulo)
         val textViewAutor = itemLivro.findViewById<TextView>(R.id.textViewAutor)
         val textViewCategoria = itemLivro.findViewById<TextView>(R.id.textViewCategoria)
+
+        init {
+            itemLivro.setOnClickListener(this)
+        }
 
         var livro : Livro? = null
             get() = field
@@ -31,6 +37,25 @@ class AdapterLivros(val fragment: ListaLivrosFragment) : RecyclerView.Adapter<Ad
                 textViewAutor.text = livro?.autor ?: ""
                 textViewCategoria.text = livro?.categoria?.nome ?: ""
             }
+
+        /**
+         * Called when a view has been clicked.
+         *
+         * @param v The view that was clicked.
+         */
+        override fun onClick(v: View?) {
+            viewHolderSelecionado?.desseleciona()
+            seleciona()
+        }
+
+        private fun seleciona() {
+            itemView.setBackgroundResource(android.R.color.holo_orange_light)
+            viewHolderSelecionado = this
+        }
+
+        private fun desseleciona() {
+            itemView.setBackgroundResource(android.R.color.white)
+        }
     }
 
     /**
