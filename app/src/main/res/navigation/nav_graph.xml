@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/EliminarLivroFragment"
         android:name="pt.ipg.livros.EliminarLivroFragment"
-        android:label="eliminar_livro_label"
+        android:label="@string/eliminar_livro_label"
         tools:layout="@layout/fragment_eliminar_livro">
         <action
             android:id="@+id/action_EliminarLivroFragment_to_ListaLivrosFragment"

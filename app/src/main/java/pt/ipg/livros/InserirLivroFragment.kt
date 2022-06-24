@@ -24,10 +24,6 @@ class InserirLivroFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     // onDestroyView.
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,7 +42,7 @@ class InserirLivroFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
 
         LoaderManager.getInstance(this).initLoader(ID_LOADER_CATEGORIAS, null, this)
 
-        val activity = activity as MainActivity
+        val activity = requireActivity() as MainActivity
         activity.fragment = this
         activity.idMenuAtual = R.menu.menu_edicao
     }
