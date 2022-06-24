@@ -8,19 +8,13 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SimpleCursorAdapter
+import android.widget.Spinner
 import androidx.loader.app.LoaderManager
 import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import pt.ipg.livros.databinding.FragmentInserirLivroBinding
-import pt.ipg.livros.databinding.FragmentListaLivrosBinding
 
-/**
- * A simple [Fragment] subclass.
- * Use the [InserirLivroFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class InserirLivroFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     private var _binding: FragmentInserirLivroBinding? = null
 
@@ -37,9 +31,12 @@ class InserirLivroFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentInserirLivroBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_inserir_livro, container, false)
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -150,13 +147,46 @@ class InserirLivroFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     fun processaOpcaoMenu(item: MenuItem) : Boolean =
         when(item.itemId) {
             R.id.action_guardar -> {
+                guardar()
                 true
             }
             R.id.action_cancelar -> {
-                findNavController().navigate(R.id.action_InserirLivroFragment_to_ListaLivrosFragment)
+                voltaListaLivros()
                 true
             }
             else -> false
         }
 
+    private fun guardar() {
+        val titulo = binding.editTextTitulo.text.toString()
+        if (titulo.isBlank()) {
+            binding.editTextTitulo.error = getString(R.string.titulo_obrigatorio)
+            binding.editTextTitulo.requestFocus()
+            return
+        }
+
+        val autor = binding.editTextAutor.text.toString()
+        if (autor.isBlank()) {
+            binding.editTextAutor.error = getString(R.string.autor_obrigatorio)
+            binding.editTextAutor.requestFocus()
+            return
+        }
+
+        val idCategoria = binding.spinnerCategorias.selectedItemId
+        if (idCategoria == Spinner.INVALID_ROW_ID) {
+            binding.textViewCategoria.error = getString(R.string.categoria_obrigatoria)
+            binding.spinnerCategorias.requestFocus()
+            return
+        }
+
+        insereLivro(titulo, autor, idCategoria)
+    }
+
+    private fun insereLivro(titulo: String, autor: String, idCategoria: Long) {
+
+    }
+
+    private fun voltaListaLivros() {
+        findNavController().navigate(R.id.action_InserirLivroFragment_to_ListaLivrosFragment)
+    }
 }

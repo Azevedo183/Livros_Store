@@ -20,4 +20,8 @@
 
     <string name="guardar">Guardar</string>
     <string name="cancelar">Cancelar</string>
+
+    <string name="titulo_obrigatorio">Preencha o título</string>
+    <string name="autor_obrigatorio">Preencha o autor</string>
+    <string name="categoria_obrigatoria">Escolha uma categoria</string>
 </resources>
