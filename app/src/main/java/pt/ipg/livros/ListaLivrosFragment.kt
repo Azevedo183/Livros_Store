@@ -18,6 +18,15 @@ import pt.ipg.livros.databinding.FragmentListaLivrosBinding
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
 class ListaLivrosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
+    var livroSeleccionado : Livro? = null
+        get() = field
+        set(value) {
+            if (value != field) {
+                field = value
+                (requireActivity() as MainActivity).mostraOpcoesAlterarEliminar(field != null)
+            }
+        }
+
 
     private var _binding: FragmentListaLivrosBinding? = null
     private var adapterLivros : AdapterLivros? = null
