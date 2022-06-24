@@ -3,6 +3,7 @@ package pt.ipg.livros
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.loader.app.LoaderManager
@@ -14,6 +15,8 @@ class EliminarLivroFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+
+    private lateinit var livro: Livro
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,5 +37,24 @@ class EliminarLivroFragment : Fragment() {
         val activity = requireActivity() as MainActivity
         activity.fragment = this
         activity.idMenuAtual = R.menu.menu_eliminar
+
+        livro = EliminarLivroFragmentArgs.fromBundle(arguments!!).livro
+
+        binding.textViewTitulo.text = livro.titulo
+        binding.textViewAutor.text = livro.autor
+        binding.textViewCategoria.text = livro.categoria.nome
     }
+
+    fun processaOpcaoMenu(item: MenuItem) : Boolean =
+        when(item.itemId) {
+            R.id.action_eliminar -> {
+
+                true
+            }
+            R.id.action_cancelar -> {
+                //voltaListaLivros()
+                true
+            }
+            else -> false
+        }
 }
