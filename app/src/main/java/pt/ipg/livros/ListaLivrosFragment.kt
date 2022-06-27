@@ -21,10 +21,8 @@ class ListaLivrosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     var livroSeleccionado : Livro? = null
         get() = field
         set(value) {
-            if (value != field) {
-                field = value
-                (requireActivity() as MainActivity).mostraOpcoesAlterarEliminar(field != null)
-            }
+            field = value
+            (requireActivity() as MainActivity).mostraOpcoesAlterarEliminar(field != null)
         }
 
 
