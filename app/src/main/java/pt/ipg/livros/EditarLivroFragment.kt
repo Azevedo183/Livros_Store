@@ -136,6 +136,22 @@ class EditarLivroFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         )
 
         binding.spinnerCategorias.adapter = adapterCategorias
+
+        atualizaCategoriaSelecionada()
+    }
+
+    private fun atualizaCategoriaSelecionada() {
+        if (livro == null) return
+        val idCategoria = livro!!.categoria.id
+
+        val ultimaCategoria = binding.spinnerCategorias.count - 1
+
+        for (i in 0..ultimaCategoria) {
+            if (binding.spinnerCategorias.getItemIdAtPosition(i) == idCategoria) {
+                binding.spinnerCategorias.setSelection(i)
+                return
+            }
+        }
     }
 
     /**
