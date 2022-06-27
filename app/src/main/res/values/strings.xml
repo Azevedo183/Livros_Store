@@ -27,5 +27,8 @@
     <string name="categoria_obrigatoria">Escolha uma categoria</string>
 
     <string name="livro_guardado_sucesso">Livro guardado com sucesso</string>
+    <string name="livro_eliminado_sucesso">Livro eliminado com sucesso</string>
+
     <string name="erro_guardar_livro">Erro ao guardar livro</string>
+    <string name="erro_eliminar_livro">Erro ao eliminar livro</string>
 </resources>

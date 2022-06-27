@@ -1,12 +1,15 @@
 package pt.ipg.livros
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.loader.app.LoaderManager
+import android.widget.Toast
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import pt.ipg.livros.databinding.FragmentEliminarLivroBinding
 
 class EliminarLivroFragment : Fragment() {
@@ -48,13 +51,35 @@ class EliminarLivroFragment : Fragment() {
     fun processaOpcaoMenu(item: MenuItem) : Boolean =
         when(item.itemId) {
             R.id.action_eliminar -> {
-
+                eliminaLivro()
                 true
             }
             R.id.action_cancelar -> {
-                //voltaListaLivros()
+                voltaListaLivros()
                 true
             }
             else -> false
         }
+
+    private fun eliminaLivro() {
+        val enderecoLivro = Uri.withAppendedPath(ContentProviderLivros.ENDERECO_LIVROS, "${livro.id}")
+        val registosEliminados = requireActivity().contentResolver.delete(enderecoLivro, null, null)
+
+        if (registosEliminados != 1) {
+            Snackbar.make(
+                binding.textViewTitulo,
+                R.string.erro_eliminar_livro,
+                Snackbar.LENGTH_INDEFINITE
+            ).show()
+            return
+        }
+
+        Toast.makeText(requireContext(), R.string.livro_eliminado_sucesso, Toast.LENGTH_LONG).show()
+        voltaListaLivros()
+    }
+
+    private fun voltaListaLivros() {
+        val acao = EliminarLivroFragmentDirections.actionEliminarLivroFragmentToListaLivrosFragment()
+        findNavController().navigate(acao)
+    }
 }
