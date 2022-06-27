@@ -36,7 +36,7 @@ class BaseDadosTest {
 
     @Before
     fun apagaBaseDados() {
-        appContext().deleteDatabase(BDLivrosOpenHelper.NOME)
+        //appContext().deleteDatabase(BDLivrosOpenHelper.NOME)
     }
 
     @Test

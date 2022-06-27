@@ -1,6 +1,7 @@
 package pt.ipg.livros
 
 import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -204,21 +205,39 @@ class EditarLivroFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
             return
         }
 
-        insereLivro(titulo, autor, idCategoria)
+        val livroGuardado =
+            if (livro == null) {
+                insereLivro(titulo, autor, idCategoria)
+            } else {
+                alteraLivro(titulo, autor, idCategoria)
+            }
+
+        if (livroGuardado) {
+            Toast.makeText(requireContext(), R.string.livro_guardado_sucesso, Toast.LENGTH_LONG)
+                .show()
+            voltaListaLivros()
+        } else {
+            Snackbar.make(binding.editTextTitulo, R.string.erro_guardar_livro, Snackbar.LENGTH_INDEFINITE).show()
+            return
+        }
     }
 
-    private fun insereLivro(titulo: String, autor: String, idCategoria: Long) {
+    private fun alteraLivro(titulo: String, autor: String, idCategoria: Long) : Boolean {
+        val livro = Livro(titulo, autor, Categoria(id = idCategoria))
+
+        val enderecoLivro = Uri.withAppendedPath(ContentProviderLivros.ENDERECO_LIVROS, "${this.livro!!.id}")
+
+        val registosAlterados = requireActivity().contentResolver.update(enderecoLivro, livro.toContentValues(), null, null)
+
+        return registosAlterados == 1
+    }
+
+    private fun insereLivro(titulo: String, autor: String, idCategoria: Long): Boolean {
         val livro = Livro(titulo, autor, Categoria(id = idCategoria))
 
         val enderecoLivroInserido = requireActivity().contentResolver.insert(ContentProviderLivros.ENDERECO_LIVROS, livro.toContentValues())
 
-        if (enderecoLivroInserido == null) {
-            Snackbar.make(binding.editTextTitulo, R.string.erro_guardar_livro, Snackbar.LENGTH_INDEFINITE).show()
-            return
-        }
-
-        Toast.makeText(requireContext(), R.string.livro_guardado_sucesso, Toast.LENGTH_LONG).show()
-        voltaListaLivros()
+        return enderecoLivroInserido != null
     }
 
     private fun voltaListaLivros() {
