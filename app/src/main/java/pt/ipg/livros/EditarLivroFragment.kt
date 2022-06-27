@@ -24,6 +24,8 @@ class EditarLivroFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    private var livro: Livro? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,13 +42,21 @@ class EditarLivroFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        LoaderManager.getInstance(this).initLoader(ID_LOADER_CATEGORIAS, null, this)
-
         val activity = requireActivity() as MainActivity
         activity.fragment = this
         activity.idMenuAtual = R.menu.menu_edicao
-    }
 
+        if (arguments != null) {
+            livro = EditarLivroFragmentArgs.fromBundle(arguments!!).livro
+
+            if (livro != null) {
+                binding.editTextTitulo.setText(livro!!.titulo)
+                binding.editTextAutor.setText(livro!!.autor)
+            }
+        }
+
+        LoaderManager.getInstance(this).initLoader(ID_LOADER_CATEGORIAS, null, this)
+    }
 
     companion object {
         const val ID_LOADER_CATEGORIAS = 0
