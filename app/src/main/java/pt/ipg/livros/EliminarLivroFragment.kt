@@ -1,5 +1,6 @@
 package pt.ipg.livros
 
+import android.content.DialogInterface
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import pt.ipg.livros.databinding.FragmentEliminarLivroBinding
@@ -62,6 +64,18 @@ class EliminarLivroFragment : Fragment() {
         }
 
     private fun eliminaLivro() {
+        val alertDialog = AlertDialog.Builder(requireContext())
+
+        alertDialog.apply {
+            setTitle(R.string.eliminar_livro_label)
+            setMessage(R.string.confirma_eliminar_livro)
+            setNegativeButton(android.R.string.cancel, DialogInterface.OnClickListener { dialogInterface, i ->  })
+            setPositiveButton(R.string.eliminar, DialogInterface.OnClickListener { dialogInterface, i -> confirmaEliminarLivro() })
+            show()
+        }
+    }
+
+    private fun confirmaEliminarLivro() {
         val enderecoLivro = Uri.withAppendedPath(ContentProviderLivros.ENDERECO_LIVROS, "${livro.id}")
         val registosEliminados = requireActivity().contentResolver.delete(enderecoLivro, null, null)
 

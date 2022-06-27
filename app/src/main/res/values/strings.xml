@@ -31,4 +31,6 @@
 
     <string name="erro_guardar_livro">Erro ao guardar livro</string>
     <string name="erro_eliminar_livro">Erro ao eliminar livro</string>
+
+    <string name="confirma_eliminar_livro">Tem a certeza que pretende eliminar o livro?</string>
 </resources>
