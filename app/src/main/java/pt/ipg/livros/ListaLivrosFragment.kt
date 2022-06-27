@@ -151,7 +151,11 @@ class ListaLivrosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
                 findNavController().navigate(acao)
                 true
             }
-            R.id.action_alterar -> true
+            R.id.action_alterar -> {
+                val acao = ListaLivrosFragmentDirections.actionListaLivrosToEditarLivro(livroSeleccionado)
+                findNavController().navigate(acao)
+                true
+            }
             R.id.action_eliminar -> {
                 val acao = ListaLivrosFragmentDirections.actionListaLivrosFragmentToEliminarLivroFragment(livroSeleccionado!!)
                 findNavController().navigate(acao)
