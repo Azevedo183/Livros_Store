@@ -147,7 +147,7 @@ class ListaLivrosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     fun processaOpcaoMenu(item: MenuItem) : Boolean =
         when(item.itemId) {
             R.id.action_inserir -> {
-                val acao = ListaLivrosFragmentDirections.actionListaLivrosFragmentToInserirLivroFragment()
+                val acao = ListaLivrosFragmentDirections.actionListaLivrosToEditarLivro()
                 findNavController().navigate(acao)
                 true
             }

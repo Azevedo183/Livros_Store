@@ -15,10 +15,10 @@ import androidx.loader.content.CursorLoader
 import androidx.loader.content.Loader
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import pt.ipg.livros.databinding.FragmentInserirLivroBinding
+import pt.ipg.livros.databinding.FragmentEditarLivroBinding
 
-class InserirLivroFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
-    private var _binding: FragmentInserirLivroBinding? = null
+class EditarLivroFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
+    private var _binding: FragmentEditarLivroBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -28,7 +28,7 @@ class InserirLivroFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentInserirLivroBinding.inflate(inflater, container, false)
+        _binding = FragmentEditarLivroBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -196,6 +196,6 @@ class InserirLivroFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
     }
 
     private fun voltaListaLivros() {
-        findNavController().navigate(R.id.action_InserirLivroFragment_to_ListaLivrosFragment)
+        findNavController().navigate(R.id.action_editar_livro_to_lista_livros)
     }
 }

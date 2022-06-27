@@ -1,7 +1,6 @@
 package pt.ipg.livros
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -61,8 +60,8 @@ class MainActivity : AppCompatActivity() {
             opcaoProcessada = (fragment as MenuPrincipalFragment).processaOpcaoMenu(item)
         } else if (fragment is ListaLivrosFragment) {
             opcaoProcessada = (fragment as ListaLivrosFragment).processaOpcaoMenu(item)
-        } else if (fragment is InserirLivroFragment) {
-            opcaoProcessada = (fragment as InserirLivroFragment).processaOpcaoMenu(item)
+        } else if (fragment is EditarLivroFragment) {
+            opcaoProcessada = (fragment as EditarLivroFragment).processaOpcaoMenu(item)
         } else if (fragment is EliminarLivroFragment) {
             opcaoProcessada = (fragment as EliminarLivroFragment).processaOpcaoMenu(item)
         } else {
