@@ -149,11 +149,13 @@ class ListaLivrosFragment : Fragment(), LoaderManager.LoaderCallbacks<Cursor> {
             R.id.action_inserir -> {
                 val acao = ListaLivrosFragmentDirections.actionListaLivrosToEditarLivro()
                 findNavController().navigate(acao)
+                (activity as MainActivity).atualizaTitulo(R.string.inserir_livro_label)
                 true
             }
             R.id.action_alterar -> {
                 val acao = ListaLivrosFragmentDirections.actionListaLivrosToEditarLivro(livroSeleccionado)
                 findNavController().navigate(acao)
+                (activity as MainActivity).atualizaTitulo(R.string.alterar_livro_label)
                 true
             }
             R.id.action_eliminar -> {
